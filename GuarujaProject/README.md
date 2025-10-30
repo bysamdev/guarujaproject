@@ -1,11 +1,7 @@
-# Sistema de Gerenciamento - Projeto Acadêmico
-
-Sistema web desenvolvido para disciplina de programação web, com funcionalidades de cadastro de usuários e controle de transações financeiras.
-
 ## Tecnologias Utilizadas
 
 - Backend: C# com ASP.NET Core
-- Frontend: React
+- Frontend: React, HTML e CSS
 - Banco de Dados: SQL Server
 - ORM: Entity Framework Core
 
@@ -15,35 +11,9 @@ Sistema web desenvolvido para disciplina de programação web, com funcionalidad
 - SQL Server (LocalDB ou Express)
 - Node.js (para o frontend)
 
-## Como Executar
-
-### Backend
-
-1. Abra o terminal na pasta GuarujaProject
-2. Configure a connection string no appsettings.json se necessário
-3. Execute as migrations:
-```bash
-dotnet ef migrations add InitialCreate
-dotnet ef database update
-```
-4. Execute o projeto:
-```bash
-dotnet run
-```
+## Informacoes Uteis
 
 A API estará disponível em: http://localhost:5000
-
-### Frontend
-
-1. Entre na pasta frontend
-2. Instale as dependências:
-```bash
-npm install
-```
-3. Execute o projeto:
-```bash
-npm start
-```
 
 O frontend estará disponível em: http://localhost:3000
 
@@ -52,7 +22,7 @@ O frontend estará disponível em: http://localhost:3000
 - CRUD completo de usuários (Create, Read, Update, Delete)
 - Cadastro e listagem de transações
 - Relacionamento entre usuários e transações
-- Interface web responsiva
+- Interface web simples e responsiva
 
 ## Estrutura do Projeto
 
@@ -64,7 +34,3 @@ GuarujaProject/
 ├── frontend/            # Aplicação React
 └── README.md
 ```
-
-## Autor
-
-Projeto desenvolvido para disciplina de programação web
