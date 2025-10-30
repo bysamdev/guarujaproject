@@ -1,0 +1,38 @@
+services:
+  db:
+    image: mysql:8
+    container_name: mysql-guaruja
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: senha123
+      MYSQL_DATABASE: GuarujaDB
+      MYSQL_USER: guaruja
+      MYSQL_PASSWORD: senha123
+    ports:
+      - "3307:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "-psenha123"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build:
+      context: .
+      dockerfile: GuarujaProject/Dockerfile
+    container_name: api-guaruja
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Server=db;Port=3306;Database=GuarujaDB;User=guaruja;Password=senha123;TreatTinyAsBoolean=false;CharSet=utf8mb4;SslMode=Preferred"
+    ports:
+      - "5001:5000"
+
+volumes:
+  dbdata:
+
+

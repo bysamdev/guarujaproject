@@ -8,7 +8,7 @@
 ## Requisitos
 
 - .NET 8.0 SDK
-- SQL Server (LocalDB ou Express)
+- SQL Server (LocalDB)
 - Node.js (para o frontend)
 
 ## Informacoes Uteis

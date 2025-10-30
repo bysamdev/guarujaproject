@@ -1,4 +1,3 @@
-git branch -M main
 using Microsoft.EntityFrameworkCore;
 using GuarujaProject.Data;
 
@@ -7,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
-        options.JsonSerializerOptions.ReferenceHandler = 
+        options.JsonSerializerOptions.ReferenceHandler =
             System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
     });
 
@@ -15,8 +14,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var serverVersion = ServerVersion.AutoDetect(connectionString);
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseMySql(connectionString, serverVersion));
 
 builder.Services.AddCors(options =>
 {
@@ -29,6 +29,13 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+// aplica migrations automaticamente
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
 
 app.UseCors("AllowAll");
 
