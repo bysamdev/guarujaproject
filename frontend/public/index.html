@@ -1,14 +1,116 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Sistema de Gerenciamento" />
-    <title>Sistema Guarujá</title>
-  </head>
-  <body>
-    <noscript>Você precisa habilitar JavaScript para executar este app.</noscript>
-    <div id="root"></div>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guaruja - Controle Financeiro</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Guaruja System</h1>
+            <p>Baita sistemão top de controle financeiro</p>
+        </header>
+
+        <main>
+            <!-- Seção de Usuários -->
+            <section class="card">
+                <h2>Gerenciamento de Usuário</h2>
+                <form id="usuarioForm">
+                    <div class="form-group">
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="senha">Senha:</label>
+                        <input type="password" id="senha" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Criar Usuário</button>
+                </form>
+
+                <div class="usuarios-list" id="usuariosList">
+                    <h3>Usuários Cadastrados</h3>
+                    <div id="usuariosContainer"></div>
+                </div>
+            </section>
+
+            <!-- Seção de Transações -->
+            <section class="card">
+                <h2>Nova Movimentação</h2>
+                <form id="transacaoForm">
+                    <div class="form-group">
+                        <label for="usuarioSelect">Usuário:</label>
+                        <select id="usuarioSelect" required>
+                            <option value="">Selecione um usuário</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao">Descrição:</label>
+                        <input type="text" id="descricao" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="valor">Valor (R$):</label>
+                        <input type="number" id="valor" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo">Tipo:</label>
+                        <select id="tipo" required>
+                            <option value="">Selecione</option>
+                            <option value="Receita">Receita</option>
+                            <option value="Despesa">Despesa</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoria">Categoria:</label>
+                        <input type="text" id="categoria" placeholder="Opcional">
+                    </div>
+                    <button type="submit" class="btn btn-success">Adicionar Transação</button>
+                </form>
+            </section>
+
+            <!-- Seção de Extrato -->
+            <section class="card">
+                <h2>📊 Extrato Financeiro</h2>
+                <div class="filter-group">
+                    <label for="filtroUsuario">Filtrar por usuário:</label>
+                    <select id="filtroUsuario">
+                        <option value="">Todos</option>
+                    </select>
+                    <button onclick="carregarTransacoes()" class="btn btn-secondary">Atualizar</button>
+                </div>
+                
+                <div class="resumo" id="resumo">
+                    <div class="resumo-item receita">
+                        <h4>Receitas</h4>
+                        <p id="totalReceitas">R$ 0,00</p>
+                    </div>
+                    <div class="resumo-item despesa">
+                        <h4>Despesas</h4>
+                        <p id="totalDespesas">R$ 0,00</p>
+                    </div>
+                    <div class="resumo-item saldo">
+                        <h4>Saldo</h4>
+                        <p id="saldo">R$ 0,00</p>
+                    </div>
+                </div>
+
+                <div class="transacoes-list" id="transacoesList">
+                    <h3>Transações</h3>
+                    <div id="transacoesContainer"></div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Sistema realizado por: Samuel Terres e Luís Mairinque</p>
+        </footer>
+    </div>
+
+    <script src="/js/app.js"></script>
+</body>
 </html>

@@ -1,3 +1,4 @@
+git branch -M main
 using Microsoft.EntityFrameworkCore;
 using GuarujaProject.Data;
 
